@@ -6,7 +6,6 @@ import Container from "@mui/material/Container";
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-
 import { getAuth, signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
@@ -34,10 +33,18 @@ const Appbar = () => {
           <Toolbar disableGutters>
             <Typography
               style={{ fontWeight: "bold", fontSize: "1.8rem" }}
-              sx={{ flexGrow: 1 }}
+              sx={{ flexGrow: 0 }}
             >
               RateMyMental
             </Typography>
+
+            <Box sx={{ flexGrow: 1, marginLeft: "40px"}}>
+            <Button
+             style= {{fontSize: "18px", fontWeight: "600"}}
+             >
+            About
+            </Button>
+            </Box>
             <Button
               color="inherit"
               variant="outlined"
