@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
@@ -9,11 +9,10 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  onAuthStateChanged,
 } from "firebase/auth";
 import app from "./firebase";
-import {useNavigate} from 'react-router-dom'
-import Home from './Homepage';
+import { useNavigate } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const LoginPage = () => {
   const [login, setLogin] = useState(true);
@@ -25,20 +24,23 @@ const LoginPage = () => {
     email: "",
     password: "",
   });
+  const [error, setError] = useState("");
 
   const auth = getAuth();
   const navigate = useNavigate();
+  const [user] = useAuthState(auth);
+
   function sendLogin(email, password) {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
         console.log("user", user);
         navigate("/Homepage");
-      }) 
+      })
       .catch((error) => {
-        const errorCode = error.code;
+        // const errorCode = error.code;
         const errorMessage = error.message;
-        console.log("error", errorCode, errorMessage);
+        setError(errorMessage);
       });
   }
 
@@ -49,11 +51,15 @@ const LoginPage = () => {
         console.log("user", user);
       })
       .catch((error) => {
-        const errorCode = error.code;
+        // const errorCode = error.code;
         const errorMessage = error.message;
-        console.log("error", errorCode, errorMessage);
+        setError(errorMessage);
       });
   };
+
+  useEffect(() => {
+    if (user) navigate("/Homepage");
+  }, [user]);
 
   return (
     <Grid container direction="row">
@@ -73,11 +79,16 @@ const LoginPage = () => {
             <img
               src={HeadBrainEdited}
               alt="head logo"
-              style={{ width: "300px", height: "300px", marginTop: "100px" }}
+              style={{ width: "600px", height: "600px", marginTop: "100px" }}
             />
-            <Typography style={{ fontSize: "22px", marginTop: "20px" }}>
-              A mental check in for you and the ones that care about you.
-            </Typography>
+            <Box mt={10} mr={10} ml={10}>
+              <Typography
+                align="center"
+                style={{ fontSize: "3rem", marginTop: "20px", color: "white" }}
+              >
+                A mental check in for you and the ones that care about you.
+              </Typography>
+            </Box>
           </Grid>
         </Box>
       </Grid>
@@ -120,6 +131,8 @@ const LoginPage = () => {
                   onChange={(e) =>
                     setValues({ ...values, password: e.target.value })
                   }
+                  error={error}
+                  helperText={error ? "Login Failed!" : " "}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -181,6 +194,8 @@ const LoginPage = () => {
                   onChange={(e) =>
                     setAccount({ ...account, password: e.target.value })
                   }
+                  error={error}
+                  helperText={error ? "Sign Up Failed!" : " "}
                 />
               </Grid>
               <Grid item xs={12}>
