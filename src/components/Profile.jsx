@@ -49,6 +49,42 @@ const Profile = () => {
                 Role: {userData.role}
               </Typography>
             </Grid>
+            <Grid item xs={12}>
+              <Typography style={{ fontSize: "1rem" }}>
+                Ratings:
+                {userData.ratings &&
+                  userData.ratings.map((rate) => (
+                    <Typography>
+                      Date: {rate.date} Rating: {rate.rating}
+                    </Typography>
+                  ))}
+              </Typography>
+            </Grid>
+
+            <Grid item xs={12}>
+              <Typography style={{ fontSize: "1rem" }}>
+                Professors:
+                {userData.professors &&
+                  userData.professors.map((prof) => (
+                    <>
+                      {" "}
+                      {prof.firstName} {prof.lastName}
+                    </>
+                  ))}
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography style={{ fontSize: "1rem" }}>
+                Students:
+                {userData.students &&
+                  userData.students.map((stu) => (
+                    <>
+                      {" "}
+                      {stu.firstName} {stu.lastName}
+                    </>
+                  ))}
+              </Typography>
+            </Grid>
           </Grid>
         </Box>
       ) : (
