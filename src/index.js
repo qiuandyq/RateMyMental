@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+// import { initializeApp } from "firebase/app";
+// import { getAnalytics } from "firebase/analytics";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -19,17 +19,17 @@ ReactDOM.render(
 reportWebVitals();
 
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBUmhsdf7j-mLsMsd8KF5eouOoIUW4QAW8",
-  authDomain: "ratemymental.firebaseapp.com",
-  projectId: "ratemymental",
-  storageBucket: "ratemymental.appspot.com",
-  messagingSenderId: "954679756010",
-  appId: "1:954679756010:web:e0e0b115d39f7913538393",
-  measurementId: "G-38146G8GS5"
-};
+// const firebaseConfig = {
+//   apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
+//   authDomain: process.env.REACT_APP_FIREBASE_AUTHDOMAIN,
+//   projectId: process.env.REACT_APP_FIREBASE_PROJECTID,
+//   storageBucket: process.env.REACT_APP_FIREBASE_STORAGEBUCKET,
+//   messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGINGSENDERID,
+//   appId: process.env.REACT_APP_FIREBASE_APPID,
+//   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENTID
+// };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const analytics = getAnalytics(app);
+// const app = initializeApp(firebaseConfig);
+// const db = getFirestore(app);
+// const analytics = getAnalytics(app);
