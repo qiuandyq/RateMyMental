@@ -3,7 +3,34 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 
+import { db } from "./firebase";
+import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
+
 const FeelingRating = () => {
+
+  const auth = getAuth();
+  const [user] = useAuthState(auth);
+
+
+  const sendRating = async (event) => {
+    
+    var userRef = doc(db, "users", user.uid);
+    try{
+      await updateDoc(userRef, {
+          ratings: arrayUnion({
+            rating: event.target.value,
+            date: new Date().toString()
+          }),
+      });
+    }
+    catch(err){
+      console.log(err);
+    }
+
+  };
+
   return (
     <Grid
       container
@@ -37,6 +64,8 @@ const FeelingRating = () => {
           <Grid container spacing={2}>
             <Grid item xs={4}>
               <Button
+                value = "1"
+                onClick={ (value) => sendRating(value) }
                 style={{
                   borderWidth: "2.8px",
                   minWidth: "90px",
@@ -49,6 +78,8 @@ const FeelingRating = () => {
             </Grid>
             <Grid item xs={4}>
               <Button
+                value = "2"
+                onClick={ (value) => sendRating(value) }
                 style={{
                   borderWidth: "2.8px",
                   minWidth: "90px",
@@ -61,6 +92,8 @@ const FeelingRating = () => {
             </Grid>
             <Grid item xs={4}>
               <Button
+                value = "3"
+                onClick={ (value) => sendRating(value) }
                 style={{
                   borderWidth: "2.8px",
                   minWidth: "90px",
@@ -73,6 +106,8 @@ const FeelingRating = () => {
             </Grid>
             <Grid item xs={4}>
               <Button
+                value = "4"
+                onClick={ (value) => sendRating(value) }
                 style={{
                   borderWidth: "2.8px",
                   minWidth: "90px",
@@ -85,6 +120,8 @@ const FeelingRating = () => {
             </Grid>
             <Grid item xs={4}>
               <Button
+                value = "5"
+                onClick={ (value) => sendRating(value) }
                 style={{
                   borderWidth: "2.8px",
                   minWidth: "90px",
@@ -97,6 +134,8 @@ const FeelingRating = () => {
             </Grid>
             <Grid item xs={4}>
               <Button
+                value = "6"
+                onClick={ (value) => sendRating(value) }
                 style={{
                   borderWidth: "2.8px",
                   minWidth: "90px",
@@ -109,6 +148,8 @@ const FeelingRating = () => {
             </Grid>
             <Grid item xs={4}>
               <Button
+                value = "7"
+                onClick={ (value) => sendRating(value) }
                 style={{
                   borderWidth: "2.8px",
                   minWidth: "90px",
@@ -121,6 +162,8 @@ const FeelingRating = () => {
             </Grid>
             <Grid item xs={4}>
               <Button
+                value = "8"
+                onClick={ (value) => sendRating(value) }
                 style={{
                   borderWidth: "2.8px",
                   minWidth: "90px",
@@ -133,6 +176,8 @@ const FeelingRating = () => {
             </Grid>
             <Grid item xs={4}>
               <Button
+                value = "9"
+                onClick={ (value) => sendRating(value) }
                 style={{
                   borderWidth: "2.8px",
                   minWidth: "90px",
