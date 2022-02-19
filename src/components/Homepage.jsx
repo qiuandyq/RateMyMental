@@ -9,6 +9,7 @@ import Grid from "@mui/material/Grid";
 import { getAuth } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
+import About from "./About";
 
 const Homepage = () => {
   const auth = getAuth();
@@ -167,6 +168,7 @@ const Homepage = () => {
           </Box>
         </Grid>
       </Grid>
+      <About/>
     </div>
   );
 };
