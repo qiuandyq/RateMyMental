@@ -1,4 +1,13 @@
 import React, { useState, useEffect } from "react";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { app, db } from "./firebase";
+import { useNavigate } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { setDoc, doc } from "firebase/firestore";
 
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -11,15 +20,6 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
 import HeadBrainEdited from "../HeadBrainEdited.png";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
-import { app, db } from "./firebase";
-import { useNavigate } from "react-router-dom";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { setDoc, doc } from "firebase/firestore";
 
 const LoginPage = () => {
   const [login, setLogin] = useState(true);
@@ -65,8 +65,12 @@ const LoginPage = () => {
               lastName: account.lastName,
               role: account.role,
               email: account.email,
+              professors: [],
+              students: [],
+              ratings: [],
             }
           );
+          console.log(docRef);
         } catch (e) {
           console.log("error", e);
         }
@@ -82,7 +86,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (user) navigate("/home");
-  }, [user]);
+  }, [user, navigate]);
 
   return (
     <Grid container direction="row">
@@ -230,8 +234,8 @@ const LoginPage = () => {
                     }
                     fullWidth
                   >
-                    <MenuItem value="client">Client</MenuItem>
-                    <MenuItem value="patient">Patient</MenuItem>
+                    <MenuItem value="student">Student</MenuItem>
+                    <MenuItem value="professor">Professor</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>
@@ -283,7 +287,6 @@ const LoginPage = () => {
           )}
         </Box>
       </Grid>
-
     </Grid>
   );
 };
