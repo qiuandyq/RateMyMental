@@ -1,11 +1,12 @@
 import "./App.css";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import {Routes, Route} from 'react-router-dom';
+import { Routes, Route, Navigate } from "react-router-dom";
 
 // import Appbar from "./components/Appbar";
 import LoginPage from "./components/LoginPage";
 import Homepage from "./components/Homepage";
+import Profile from "./components/Profile";
 
 const theme = createTheme({
   palette: {
@@ -37,8 +38,10 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Routes>
-        <Route path="/LoginPage" element= {<LoginPage/>}/>
-        <Route path="/Homepage" element= {<Homepage/>}/>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/home" element={<Homepage />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/" element={<Navigate replace to="/home" />} />
       </Routes>
       {/* <Appbar /> */}
       {/* <Homepage/> */}

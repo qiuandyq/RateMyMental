@@ -6,6 +6,8 @@ import Container from "@mui/material/Container";
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
+import PersonIcon from "@mui/icons-material/Person";
+
 import { getAuth, signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
@@ -16,7 +18,7 @@ const Appbar = () => {
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
-        navigate("/LoginPage");
+        navigate("/login");
       })
       .catch((error) => {
         console.log(error);
@@ -32,19 +34,24 @@ const Appbar = () => {
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <Typography
-              style={{ fontWeight: "bold", fontSize: "1.8rem" }}
-              sx={{ flexGrow: 0 }}
+              style={{
+                fontWeight: "bold",
+                fontSize: "1.8rem",
+                cursor: "pointer",
+              }}
+              sx={{ flexGrow: 1 }}
+              onClick={() => navigate("/home")}
             >
               RateMyMental
             </Typography>
-
-            <Box sx={{ flexGrow: 1, marginLeft: "40px"}}>
-            <Button
-             style= {{fontSize: "18px", fontWeight: "600"}}
-             >
-            About
-            </Button>
-            </Box>
+            <PersonIcon
+              onClick={() => navigate("/profile")}
+              style={{
+                fontSize: "2rem",
+                marginRight: "1.5rem",
+                cursor: "pointer",
+              }}
+            />
             <Button
               color="inherit"
               variant="outlined"

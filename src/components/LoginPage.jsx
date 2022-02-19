@@ -1,18 +1,25 @@
 import React, { useState, useEffect } from "react";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import HeadBrainEdited from "../HeadBrainEdited.png";
 import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import app from "./firebase";
+import { app, db } from "./firebase";
 import { useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { setDoc, doc } from "firebase/firestore";
+
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+
+import HeadBrainEdited from "../HeadBrainEdited.png";
 
 const LoginPage = () => {
   const [login, setLogin] = useState(true);
@@ -21,6 +28,9 @@ const LoginPage = () => {
     password: "",
   });
   const [account, setAccount] = useState({
+    firstName: "",
+    lastName: "",
+    role: "",
     email: "",
     password: "",
   });
@@ -35,7 +45,7 @@ const LoginPage = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         console.log("user", user);
-        navigate("/Homepage");
+        navigate("/home");
       })
       .catch((error) => {
         // const errorCode = error.code;
@@ -46,7 +56,24 @@ const LoginPage = () => {
 
   const createUser = (email, password) => {
     createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+      .then(async (userCredential) => {
+        try {
+          const docRef = await setDoc(
+            doc(db, "users", userCredential.user.uid),
+            {
+              firstName: account.firstName,
+              lastName: account.lastName,
+              role: account.role,
+              email: account.email,
+              professors: [],
+              students: [],
+              ratings: [],
+            }
+          );
+          console.log(docRef);
+        } catch (e) {
+          console.log("error", e);
+        }
         const user = userCredential.user;
         console.log("user", user);
       })
@@ -58,8 +85,8 @@ const LoginPage = () => {
   };
 
   useEffect(() => {
-    if (user) navigate("/Homepage");
-  }, [user]);
+    if (user) navigate("/home");
+  }, [user, navigate]);
 
   return (
     <Grid container direction="row">
@@ -177,6 +204,43 @@ const LoginPage = () => {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  id="firstName"
+                  label="First Name"
+                  variant="standard"
+                  onChange={(e) =>
+                    setAccount({ ...account, firstName: e.target.value })
+                  }
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  id="lastName"
+                  label="Last Name"
+                  variant="standard"
+                  onChange={(e) =>
+                    setAccount({ ...account, lastName: e.target.value })
+                  }
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FormControl>
+                  <InputLabel id="demo-simple-select-label">Role</InputLabel>
+                  <Select
+                    id="role"
+                    value={account.role}
+                    label="Role"
+                    onChange={(e) =>
+                      setAccount({ ...account, role: e.target.value })
+                    }
+                    fullWidth
+                  >
+                    <MenuItem value="student">Student</MenuItem>
+                    <MenuItem value="professor">Professor</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
                   id="email"
                   label="Email"
                   variant="standard"
@@ -223,7 +287,6 @@ const LoginPage = () => {
           )}
         </Box>
       </Grid>
-
     </Grid>
   );
 };
