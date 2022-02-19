@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 
+import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
+
 import AppBar from "./Appbar";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -20,6 +22,15 @@ const Homepage = () => {
   useEffect(() => {
     if (!user) navigate("/login");
   }, [user]);
+
+
+  const sendRating = async () => {
+    var userRef = doc(db, "users", user.uid);
+    await updateDoc(userRef, (
+        ratings:arrayUnion("test"),
+    ));
+
+  };
 
   return (
     <div>
