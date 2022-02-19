@@ -5,10 +5,11 @@ import Typography from '@mui/material/Typography';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
-
+import About from "./About";
 
 
 const Homepage = () => {
+
     return (
         <div>
         <AppBar/>
@@ -16,8 +17,6 @@ const Homepage = () => {
             <Box sx={{m:"auto",marginTop:"80px"}}>
                 <Typography component={'span'}>
                     <Box sx={{textAlign:'center'}}> <div style={{fontSize:"50px"}}>How are you feeling...</div> </Box>
-                
-
                 </Typography>    
             </Box>
             <Box sx={{m:"auto",marginTop:"0px"}}>
@@ -67,10 +66,9 @@ const Homepage = () => {
                 </Grid>  
                 <Grid item xs={5.1}>
                 </Grid>
-                
-
-                
             </Grid>
+
+            <About/>
         </div>
     );
 

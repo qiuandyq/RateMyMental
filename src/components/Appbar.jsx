@@ -7,6 +7,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 
+
 const Appbar = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -18,10 +19,19 @@ const Appbar = () => {
           <Toolbar disableGutters>
             <Typography
               style={{ fontWeight: "bold", fontSize: "1.8rem" }}
-              sx={{ flexGrow: 1 }}
+              sx={{ flexGrow: 0 }}
             >
               RateMyMental
             </Typography>
+
+            <Box sx={{ flexGrow: 1, marginLeft: "40px"}}>
+            <Button
+             style= {{fontSize: "18px", fontWeight: "600"}}
+             >
+            About
+            </Button>
+            </Box>
+
             <Button color="inherit" variant="outlined">
               <Typography style={{ fontWeight: "600" }}>Login</Typography>
             </Button>
