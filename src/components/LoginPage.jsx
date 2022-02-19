@@ -11,6 +11,8 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import app from "./firebase";
+// import {useNavigate} from 'react-router-dom'
+// import Home from './Homepage';
 
 const LoginPage = () => {
   const [login, setLogin] = useState(true);
@@ -30,6 +32,7 @@ const LoginPage = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         console.log("user", user);
+        // navigate('/Homepage');
       })
       .catch((error) => {
         const errorCode = error.code;
