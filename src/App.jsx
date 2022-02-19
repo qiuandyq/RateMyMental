@@ -2,8 +2,10 @@ import "./App.css";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 
+
 // import Appbar from "./components/Appbar";
 import LoginPage from "./components/LoginPage";
+import Homepage from "./components/Homepage";
 
 const theme = createTheme({
   palette: {
@@ -35,7 +37,8 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       {/* <Appbar /> */}
-      <LoginPage />
+      {/* <LoginPage />  */}
+      {/*<Homepage/>*/}
     </ThemeProvider>
   );
 }
