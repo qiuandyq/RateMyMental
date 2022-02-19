@@ -38,11 +38,21 @@ const NoProfessors = () => {
   const handleAddProfessor = async () => {
     const userRef = doc(db, "users", user.uid);
     await updateDoc(userRef, {
-      professors: arrayUnion(selectedProf),
+      professors: arrayUnion({
+        profId: selectedProf.profId,
+        email: selectedProf.data.email,
+        firstName: selectedProf.data.firstName,
+        lastName: selectedProf.data.lastName,
+      }),
     });
     const profRef = doc(db, "users", selectedProf.profId);
     await updateDoc(profRef, {
-      students: arrayUnion(studentInfo),
+      students: arrayUnion({
+        stuId: studentInfo.stuId,
+        email: studentInfo.data.email,
+        firstName: studentInfo.data.firstName,
+        lastName: studentInfo.data.lastName,
+      }),
     });
     window.location.reload();
   };
