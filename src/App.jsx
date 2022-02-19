@@ -2,7 +2,7 @@ import "./App.css";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 
-import Appbar from "./components/Appbar";
+// import Appbar from "./components/Appbar";
 import LoginPage from "./components/LoginPage";
 
 const theme = createTheme({
