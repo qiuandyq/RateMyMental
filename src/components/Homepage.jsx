@@ -10,6 +10,7 @@ import { getAuth } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import About from "./About";
+import Insights from "./Insights";
 
 const Homepage = () => {
   const auth = getAuth();
@@ -24,7 +25,7 @@ const Homepage = () => {
   return (
     <div>
       <AppBar />
-
+      
       <Box sx={{ m: "auto", marginTop: "80px" }}>
         <Typography component={"span"}>
           <Box sx={{ textAlign: "center" }}>
@@ -157,6 +158,7 @@ const Homepage = () => {
         </Grid>
         <Grid item xs={5.1}></Grid>
       </Grid>
+      <Insights/>
       <About/>
     </div>
   );
