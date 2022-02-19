@@ -1,10 +1,50 @@
+import React, { useState } from 'react'
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import HeadBrainEdited from '../HeadBrainEdited.png';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import app from "./firebase";
+
+
+
+
+// const auth = getAuth();
+// createUserWithEmailAndPassword(auth, email, password)
+//   .then((userCredential) => {
+//     // Signed in 
+//     const user = userCredential.user;
+//     // ...
+//   })
+//   .catch((error) => {
+//     const errorCode = error.code;
+//     const errorMessage = error.message;
+//     // ..
+//   });
+
+  // signInWithEmailAndPassword(email, password)
+  // .then((userCredential) => {
+  //   // Signed in 
+  //   const user = userCredential.user;
+  //   // ...
+  // })
+  // .catch((error) => {
+  //   const errorCode = error.code;
+  //   const errorMessage = error.message;
+  // });
 
 const LoginPage = () => {
+  const [values, setValues] = useState({
+    email: "",
+    password: "",
+  })
+
+  function sendLogin(email, password){
+    app.auth().signInWithEmailAndPassword(email, password);
+  }
+
   return (
     <Grid container direction="row">
       <Grid item xs={6}>
@@ -13,7 +53,19 @@ const LoginPage = () => {
             height: "100vh",
             backgroundColor: "primary.main",
           }}
-        ></Box>
+        >
+          <Grid container 
+          direction="column"
+          justifyContent="center"
+          alignItems="center"
+          >
+          <img src={HeadBrainEdited} alt="head logo" style={{ width: "300px", height: "300px", marginTop: "100px"}}/>
+          <Typography
+          style={{fontSize: "22px", marginTop:"20px"}}>
+            A mental check in for you and the ones that care about you.
+          </Typography>
+            </Grid>
+        </Box>
       </Grid>
       <Grid item xs={6}>
         <Box mt={30} mr={10} ml={10}>
@@ -35,18 +87,24 @@ const LoginPage = () => {
               </Typography>
             </Grid>
             <Grid item xs={12}>
-              <TextField id="standard-basic" label="Email" variant="standard" />
+              <TextField 
+              id="email" 
+              label="Email" 
+              variant="standard"
+              onChange={(e) =>
+              setValues({...values, email: e.target.value})} />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                id="standard-basic"
+                id="password"
                 label="Password"
                 variant="standard"
                 type="password"
-              />
+                onChange={(e) =>
+                  setValues({...values, password: e.target.value})}/>
             </Grid>
             <Grid item xs={12}>
-              <Button fullWidth variant="contained">
+              <Button fullWidth variant="contained" onClick={() =>sendLogin(values.email, values.password)}>
                 Sign In
               </Button>
             </Grid>
