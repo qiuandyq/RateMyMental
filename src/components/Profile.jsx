@@ -68,7 +68,7 @@ const Profile = () => {
                   userData.professors.map((prof) => (
                     <>
                       {" "}
-                      {prof.data.firstName} {prof.data.lastName}
+                      {prof.firstName} {prof.lastName}
                     </>
                   ))}
               </Typography>
@@ -80,7 +80,7 @@ const Profile = () => {
                   userData.students.map((stu) => (
                     <>
                       {" "}
-                      {stu.data.firstName} {stu.data.lastName}
+                      {stu.firstName} {stu.lastName}
                     </>
                   ))}
               </Typography>
