@@ -9,10 +9,11 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  onAuthStateChanged,
 } from "firebase/auth";
 import app from "./firebase";
-// import {useNavigate} from 'react-router-dom'
-// import Home from './Homepage';
+import {useNavigate} from 'react-router-dom'
+import Home from './Homepage';
 
 const LoginPage = () => {
   const [login, setLogin] = useState(true);
@@ -26,14 +27,14 @@ const LoginPage = () => {
   });
 
   const auth = getAuth();
-
+  const navigate = useNavigate();
   function sendLogin(email, password) {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
         console.log("user", user);
-        // navigate('/Homepage');
-      })
+        navigate("/Homepage");
+      }) 
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;

@@ -14,14 +14,14 @@ const Homepage = () => {
         <AppBar/>
     
             <Box sx={{m:"auto",marginTop:"80px"}}>
-                <Typography>
+                <Typography component={'span'}>
                     <Box sx={{textAlign:'center'}}> <div style={{fontSize:"50px"}}>How are you feeling...</div> </Box>
                 
 
                 </Typography>    
             </Box>
             <Box sx={{m:"auto",marginTop:"0px"}}>
-                <Typography>
+                <Typography component={'span'}>
                     <Box sx={{textAlign:'center'}}> <div style={{fontSize:"18px"}}>(1-bad, 9-great)</div> </Box>
                 
 

@@ -1,7 +1,7 @@
 import "./App.css";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-
+import {Routes, Route} from 'react-router-dom';
 
 // import Appbar from "./components/Appbar";
 import LoginPage from "./components/LoginPage";
@@ -36,9 +36,12 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      <Routes>
+        <Route path="/LoginPage" element= {<LoginPage/>}/>
+        <Route path="/Homepage" element= {<Homepage/>}/>
+      </Routes>
       {/* <Appbar /> */}
-      {/* <LoginPage />  */}
-      {/*<Homepage/>*/}
+      {/* <Homepage/> */}
     </ThemeProvider>
   );
 }
