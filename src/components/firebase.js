@@ -2,11 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore"
 
-let fire = null;
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const analytics = getAnalytics(app);
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
     authDomain: process.env.REACT_APP_FIREBASE_AUTHDOMAIN,
@@ -16,6 +12,10 @@ const firebaseConfig = {
     appId: process.env.REACT_APP_FIREBASE_APPID,
     measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENTID
   };
+  
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const analytics = getAnalytics(app);
 
 
 export default app;
