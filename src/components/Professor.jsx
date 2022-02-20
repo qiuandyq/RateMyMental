@@ -65,7 +65,7 @@ const Professor = () => {
     let rating = 0;
     let date = "";
     ratings.find((student) => {
-      if (student.id === stuId) {
+      if (student.ratings.length > 0 && student.id === stuId) {
         rating = student.ratings[student.ratings.length - 1].rating;
         date = new Date(
           student.ratings[student.ratings.length - 1].date
@@ -79,9 +79,9 @@ const Professor = () => {
             backgroundColor: color[rating],
           }}
         >
-          {rating}
+          {rating ? rating : "no ratings found"}
         </Paper>
-        (last updated: {date})
+        (last updated: {date ? date : "not available"})
       </>
     );
   };
