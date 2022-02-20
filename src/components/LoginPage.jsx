@@ -68,6 +68,7 @@ const LoginPage = () => {
               professors: [],
               students: [],
               ratings: [],
+              notes: "",
             }
           );
           console.log(docRef);

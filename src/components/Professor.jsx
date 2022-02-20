@@ -75,8 +75,9 @@ const Professor = () => {
     return (
       <>
         <Paper
-          style={{
+          sx={{
             backgroundColor: color[rating],
+            p: "5px",
           }}
         >
           {rating ? rating : "no ratings found"}
