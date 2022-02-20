@@ -4,6 +4,7 @@ import { getAuth } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 
@@ -14,6 +15,12 @@ const Profile = () => {
   const auth = getAuth();
   const [user] = useAuthState(auth);
   const [userData, setUserData] = useState();
+  const parseDate = (date) => {
+    const rateDate = new Date(date)
+    const [month,day,year] = [rateDate.getMonth(),rateDate.getDate(),rateDate.getFullYear()]
+    return `${month+1} ${day} ${year}`;
+  }
+  
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -52,12 +59,32 @@ const Profile = () => {
             <Grid item xs={12}>
               <Typography style={{ fontSize: "1rem" }}>
                 Ratings:
+                <Grid container>
                 {userData.ratings &&
                   userData.ratings.map((rate) => (
-                    <Typography>
-                      Date: {rate.date} Rating: {rate.rating}
-                    </Typography>
-                  ))}
+
+                      <Grid item>
+                        <Paper sx={{
+                              borderRadius:"500px", 
+                              margin:"28px",
+                              padding:'81.25px'
+                            }}>
+                            <Typography >
+                              {rate.rating}
+                            </Typography>
+                           
+                           {parseDate(rate.date)}
+                           
+                           
+                        </Paper>
+                      </Grid>  
+
+                ))}
+                </Grid>
+                    {/* // <Typography> */}
+                    {/* //   Date: {rate.date} Rating: {rate.rating} */}
+                    {/* // </Typography> */}
+                  
               </Typography>
             </Grid>
 
