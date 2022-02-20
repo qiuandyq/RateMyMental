@@ -1,14 +1,8 @@
 import React, {useState, useEffect} from 'react'
 
 import {
-    collection,
-    query,
-    where,
-    getDocs,
     doc,
     updateDoc,
-    arrayUnion,
-    getDoc,
   } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
