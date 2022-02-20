@@ -19,7 +19,7 @@ const Homepage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user) navigate("/LoginPage");
+    if (!user) navigate("/login");
   }, [user]);
 
   return (
