@@ -140,8 +140,8 @@ function Insights() {
             width="100%"
             overflowWrap="break-word">
             <Typography
-              style={{fontSize: "24px"}}>
-                {profNotes} 
+              style={{fontSize: "24px", marginTop: "50px"}}>
+              "  {profNotes} "
             </Typography>
             </Grid>
             </Grid>
