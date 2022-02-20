@@ -21,7 +21,6 @@ function Insights() {
                 style={{ 
                     textAlign:"center", 
                     fontSize:"38px", 
-                    // textDecoration:"underline", 
                     letterSpacing:"1px", 
                     padding:"20px"}}>Insights</div>
                 </Box>
@@ -70,10 +69,10 @@ function Insights() {
                     </Box>
                 </Box>
             </Grid>
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
                 <Box
                 style={{
-                    minHeight: "40vh", 
+                    minHeight: "30vh", 
                     backgroundColor:"#A9E1CB",
                     borderRadius:"10px"}}>
                 <div style={{ 
@@ -81,7 +80,7 @@ function Insights() {
                     fontSize: "30px", 
                     paddingTop:"10px"}}>Daily Article</div>
                 </Box>
-            </Grid> 
+            </Grid>  */}
         </Grid>
     </Box>
   )
