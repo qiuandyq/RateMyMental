@@ -60,7 +60,10 @@ const Homepage = () => {
           ) : (
             <>
               {userData && userData.professors.length !== 0 ? (
-                <FeelingRating />
+                <>
+                  <FeelingRating />
+                  <Insights />
+                </>
               ) : (
                 <NoProfessors />
               )}

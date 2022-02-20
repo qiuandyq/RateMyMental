@@ -9,6 +9,7 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 
 import { db } from "./firebase";
+import ProfessorNotes from "./ProfessorNotes";
 
 const Professor = ({ setRatingTrend }) => {
   const auth = getAuth();
@@ -138,6 +139,7 @@ const Professor = ({ setRatingTrend }) => {
           </Grid>
         )}
       </Grid>
+      <ProfessorNotes/>
     </Box>
   );
 };

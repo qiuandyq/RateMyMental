@@ -1,36 +1,44 @@
-import { useEffect, useState } from "react";
-import { getAuth } from "firebase/auth";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { useNavigate } from "react-router-dom";
-import { doc, getDoc } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+import { Grid, Box, Typography } from "@mui/material";
 import { Line, Bar } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js/auto";
 
-import { Grid, Box, Typography } from "@mui/material";
-import Container from "@mui/material/Container";
-
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  doc,
+  updateDoc,
+  arrayUnion,
+  getDoc,
+} from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { db } from "./firebase";
 
 function Insights({ ratingTrend }) {
-  const [userData, setUserData] = useState();
+  const [profNotes, setProfNotes] = useState("");
   const auth = getAuth();
   const [user] = useAuthState(auth);
-
-  const navigate = useNavigate();
+  const [userData, setUserData] = useState();
 
   useEffect(() => {
-    if (!user) navigate("/login");
     const fetchUser = async () => {
       const docRef = doc(db, "users", user.uid);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         setUserData(docSnap.data());
+        const profDoc = await getDoc(
+          doc(db, "users", userData.professors[0].profId)
+        );
+        setProfNotes(profDoc.data().notes);
       } else {
         console.log("No such document!");
       }
     };
     fetchUser();
-  }, [user, navigate]);
+  }, [user]);
 
   return (
     <Box
@@ -56,8 +64,8 @@ function Insights({ ratingTrend }) {
             </div>
           </Box>
         </Grid>
-        <Grid item xs={7}>
-          {userData && userData.role === "professor" ? (
+        {userData && userData.role === "professor" ? (
+          <Grid item xs={12}>
             <Box
               style={{
                 minHeight: "40vh",
@@ -103,7 +111,9 @@ function Insights({ ratingTrend }) {
                 />
               </Box>
             </Box>
-          ) : (
+          </Grid>
+        ) : (
+          <Grid item xs={8.5}>
             <Box
               style={{
                 minHeight: "40vh",
@@ -147,42 +157,52 @@ function Insights({ ratingTrend }) {
                 />
               </Box>
             </Box>
-          )}
-        </Grid>
-        <Grid item xs={5}>
-          <Box
-            style={{
-              minHeight: "40vh",
-              backgroundColor: "#A8DFCA",
-              borderRadius: "10px",
-            }}
-          >
-            <div
+          </Grid>
+        )}
+        {userData && userData.role === "student" && (
+          <Grid item xs={3.5}>
+            <Box
               style={{
-                textAlign: "center",
-                fontSize: "30px",
-                paddingTop: "10px",
+                minHeight: "40vh",
+                backgroundColor: "#A8DFCA",
+                borderRadius: "10px",
               }}
             >
-              Notes from your host
-            </div>
-            <Box>
-              <Typography></Typography>
-            </Box>
-          </Box>
-        </Grid>
-        {/* <Grid item xs={12}>
-                <Box
+              <div
                 style={{
-                    minHeight: "30vh", 
-                    backgroundColor:"#A9E1CB",
-                    borderRadius:"10px"}}>
-                <div style={{ 
-                    textAlign: "center", 
-                    fontSize: "30px", 
-                    paddingTop:"10px"}}>Daily Article</div>
-                </Box>
-            </Grid>  */}
+                  textAlign: "center",
+                  fontSize: "30px",
+                  paddingTop: "50px",
+                }}
+              >
+                <Typography style={{ fontSize: "40px" }}>
+                  Notes from the host:
+                </Typography>
+                <Grid
+                  container
+                  display="columns"
+                  alignItems="center"
+                  justifyContents="center"
+                >
+                  <Grid
+                    display="columns"
+                    alignItems="center"
+                    justifyContents="center"
+                    width="100%"
+                    overflowWrap="break-word"
+                  >
+                    <Typography style={{ fontSize: "24px", marginTop: "50px" }}>
+                      " {profNotes} "
+                    </Typography>
+                  </Grid>
+                </Grid>
+              </div>
+              <Box>
+                <Typography></Typography>
+              </Box>
+            </Box>
+          </Grid>
+        )}
       </Grid>
     </Box>
   );
