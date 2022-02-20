@@ -11,9 +11,11 @@ import Grid from "@mui/material/Grid";
 
 import { db } from "./firebase";
 import AppBar from "./Appbar";
+import Insights from "./Insights";
 import About from "./About";
 import NoProfessors from "./NoProfessors";
 import FeelingRating from "./FeelingRating";
+import Professor from "./Professor";
 
 const Homepage = () => {
   const [userData, setUserData] = useState();
@@ -46,19 +48,7 @@ const Homepage = () => {
       {userData ? (
         <>
           {userData && userData.role === "professor" ? (
-            <Box sx={{ textAlign: "center" }} mt={10}>
-              <Grid
-                container
-                direction="column"
-                justifyContent="center"
-                alignItems="center"
-                spacing={5}
-              >
-                <Typography style={{ fontSize: "3rem" }}>
-                  Welcome Professor
-                </Typography>
-              </Grid>
-            </Box>
+            <Professor />
           ) : (
             <>
               {userData && userData.professors.length !== 0 ? (
@@ -82,7 +72,7 @@ const Homepage = () => {
           </Grid>
         </Box>
       )}
-
+    <Insights />
       <About />
     </div>
   );
