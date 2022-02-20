@@ -17,15 +17,15 @@ const Professor = () => {
   const [ratings, setRatings] = useState([]);
 
   const color = {
-    1: "#FFABAB",
-    2: "#FFC0AB",
-    3: "#FFD1AB",
-    4: "#FFDBAB",
-    5: "#FFEDAB",
-    6: "#EDFFAB",
-    7: "#E0FFAB",
-    8: "#D3FFAB",
-    9: "#C3FFAB",
+    1: "#D94C4C",
+    2: "#D97E4C",
+    3: "#D99B4C",
+    4: "#D9C84C",
+    5: "#D9D54C",
+    6: "#BED94C",
+    7: "#A8D94C",
+    8: "#8FD94C",
+    9: "#57D94C",
   };
 
   useEffect(() => {

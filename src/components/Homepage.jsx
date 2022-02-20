@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect,useState} from "react";
+
 import { getAuth } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +11,7 @@ import Grid from "@mui/material/Grid";
 
 import { db } from "./firebase";
 import AppBar from "./Appbar";
+import Insights from "./Insights";
 import About from "./About";
 import NoProfessors from "./NoProfessors";
 import FeelingRating from "./FeelingRating";
@@ -36,6 +38,9 @@ const Homepage = () => {
     };
     fetchUser();
   }, [user, navigate]);
+
+
+
 
   return (
     <div>
@@ -67,7 +72,7 @@ const Homepage = () => {
           </Grid>
         </Box>
       )}
-
+    <Insights />
       <About />
     </div>
   );
