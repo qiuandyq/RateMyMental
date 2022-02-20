@@ -139,7 +139,7 @@ const Professor = ({ setRatingTrend }) => {
           </Grid>
         )}
       </Grid>
-      <ProfessorNotes/>
+      <ProfessorNotes />
     </Box>
   );
 };

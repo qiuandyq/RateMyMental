@@ -37,7 +37,7 @@ const Homepage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user) navigate("/login");
+    if (!user || !user.uid) navigate("/login");
     const fetchUser = async () => {
       const docRef = doc(db, "users", user.uid);
       const docSnap = await getDoc(docRef);
