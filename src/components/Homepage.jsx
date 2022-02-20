@@ -1,18 +1,23 @@
-import { useEffect } from "react";
-
-import AppBar from "./Appbar";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import ButtonGroup from "@mui/material/ButtonGroup";
-import Button from "@mui/material/Button";
-import Grid from "@mui/material/Grid";
+import { useEffect, useState } from "react";
 import { getAuth } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
-import About from "./About";
+import { doc, getDoc } from "firebase/firestore";
+
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
+
+import { db } from "./firebase";
+import AppBar from "./Appbar";
 import Insights from "./Insights";
+import About from "./About";
+import NoProfessors from "./NoProfessors";
+import FeelingRating from "./FeelingRating";
 
 const Homepage = () => {
+  const [userData, setUserData] = useState();
+
   const auth = getAuth();
   const [user] = useAuthState(auth);
 
@@ -20,146 +25,62 @@ const Homepage = () => {
 
   useEffect(() => {
     if (!user) navigate("/login");
-  }, [user]);
+    const fetchUser = async () => {
+      const docRef = doc(db, "users", user.uid);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        setUserData(docSnap.data());
+      } else {
+        console.log("No such document!");
+      }
+    };
+    fetchUser();
+  }, [user, navigate]);
 
   return (
     <div>
       <AppBar />
-      
-      <Box sx={{ m: "auto", marginTop: "80px" }}>
-        <Typography component={"span"}>
-          <Box sx={{ textAlign: "center" }}>
-            {" "}
-            <div style={{ fontSize: "50px" }}>How are you feeling...</div>{" "}
-          </Box>
-        </Typography>
-      </Box>
-      <Box sx={{ m: "auto", marginTop: "0px" }}>
-        <Typography component={"span"}>
-          <Box sx={{ textAlign: "center" }}>
-            {" "}
-            <div style={{ fontSize: "18px" }}>(1-bad, 9-great)</div>{" "}
-          </Box>
-        </Typography>
-      </Box>
-      <Grid sx={{ m: "auto", marginTop: "13px" }} container rowSpacing={1}>
-        <Grid item xs={5.1}></Grid>
-        <Grid item xs={0.6}>
-          <Button
-            style={{
-              borderWidth: "2.8px",
-              minWidth: "90px",
-              minHeight: "90px",
-            }}
-            variant="outlined"
+      {userData ? (
+        <>
+          {userData && userData.role === "professor" ? (
+            <Box sx={{ textAlign: "center" }} mt={10}>
+              <Grid
+                container
+                direction="column"
+                justifyContent="center"
+                alignItems="center"
+                spacing={5}
+              >
+                <Typography style={{ fontSize: "3rem" }}>
+                  Welcome Professor
+                </Typography>
+              </Grid>
+            </Box>
+          ) : (
+            <>
+              {userData && userData.professors.length !== 0 ? (
+                <FeelingRating />
+              ) : (
+                <NoProfessors />
+              )}
+            </>
+          )}
+        </>
+      ) : (
+        <Box sx={{ textAlign: "center" }} mt={10}>
+          <Grid
+            container
+            direction="column"
+            justifyContent="center"
+            alignItems="center"
+            spacing={5}
           >
-            <div style={{ fontSize: "30px" }}>1</div>
-          </Button>
-        </Grid>
-        <Grid item xs={0.6}>
-          <Button
-            style={{
-              borderWidth: "2.8px",
-              minWidth: "90px",
-              minHeight: "90px",
-            }}
-            variant="outlined"
-          >
-            <div style={{ fontSize: "30px" }}>2</div>
-          </Button>
-        </Grid>
-        <Grid item xs={0.6}>
-          <Button
-            style={{
-              borderWidth: "2.8px",
-              minWidth: "90px",
-              minHeight: "90px",
-            }}
-            variant="outlined"
-          >
-            <div style={{ fontSize: "30px" }}>3</div>
-          </Button>
-        </Grid>
-        <Grid item xs={5.1}></Grid>
-        <Grid item xs={5.1}></Grid>
-        <Grid item xs={0.6}>
-          <Button
-            style={{
-              borderWidth: "2.8px",
-              minWidth: "90px",
-              minHeight: "90px",
-            }}
-            variant="outlined"
-          >
-            <div style={{ fontSize: "30px" }}>4</div>
-          </Button>
-        </Grid>
-        <Grid item xs={0.6}>
-          <Button
-            style={{
-              borderWidth: "2.8px",
-              minWidth: "90px",
-              minHeight: "90px",
-            }}
-            variant="outlined"
-          >
-            <div style={{ fontSize: "30px" }}>5</div>
-          </Button>
-        </Grid>
-        <Grid item xs={0.6}>
-          <Button
-            style={{
-              borderWidth: "2.8px",
-              minWidth: "90px",
-              minHeight: "90px",
-            }}
-            variant="outlined"
-          >
-            <div style={{ fontSize: "30px" }}>6</div>
-          </Button>
-        </Grid>
-        <Grid item xs={5.1}></Grid>
-        <Grid item xs={5.1}></Grid>
-        <Grid item xs={0.6}>
-          <Button
-            style={{
-              borderWidth: "2.8px",
-              minWidth: "90px",
-              minHeight: "90px",
-            }}
-            variant="outlined"
-          >
-            <div style={{ fontSize: "30px" }}>7</div>
-          </Button>
-        </Grid>
-        <Grid item xs={0.6}>
-          <Button
-            style={{
-              borderWidth: "2.8px",
-              minWidth: "90px",
-              minHeight: "90px",
-            }}
-            variant="outlined"
-          >
-            <div style={{ fontSize: "30px" }}>8</div>
-          </Button>
-        </Grid>
-        <Grid item xs={0.6}>
-          <Button
-            style={{
-              borderWidth: "2.8px",
-              minWidth: "90px",
-              minHeight: "90px",
-            }}
-            variant="outlined"
-          >
-            <div style={{ fontSize: "30px" }}>9</div>
-          </Button>
-        </Grid>
-        <Grid item xs={5.1}></Grid>
-      </Grid>
-      <Insights/>
-      <About/>
+            <Typography style={{ fontSize: "3rem" }}> loading </Typography>
+          </Grid>
+        </Box>
+      )}
+    <Insights />
+      <About />
     </div>
   );
 };
