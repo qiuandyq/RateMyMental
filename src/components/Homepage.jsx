@@ -10,6 +10,7 @@ import Grid from "@mui/material/Grid";
 
 import { db } from "./firebase";
 import AppBar from "./Appbar";
+import Insights from "./Insights";
 import About from "./About";
 import NoProfessors from "./NoProfessors";
 import FeelingRating from "./FeelingRating";
@@ -78,7 +79,7 @@ const Homepage = () => {
           </Grid>
         </Box>
       )}
-
+    <Insights />
       <About />
     </div>
   );
