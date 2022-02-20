@@ -70,6 +70,7 @@ Here's how to get started
 
 You can access our sit from our public domain
 https://rate-my-mental.vercel.app/login
+http://www.ratemymental.tech/ (Registered, may or may not work)
 
 or see below to run locally
 
