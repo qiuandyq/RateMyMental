@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect,useState} from "react";
+
 import { getAuth } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
@@ -36,6 +37,9 @@ const Homepage = () => {
     };
     fetchUser();
   }, [user, navigate]);
+
+
+
 
   return (
     <div>
