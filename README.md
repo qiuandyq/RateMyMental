@@ -43,7 +43,7 @@ RateMyMental is a mental health resource and solution to the long wait times for
 * Though the site ran well on each of our local environments, deployment caused several unforseen issues
 
 ### What you learned/are proud of
-* We learned so much about React and how amzing it is during development!!
+* We learned so much about React and how amazing it is during development!!
 * We are proud of reaching the deployment stage in such a short period of time 
 
 ### What's next!
