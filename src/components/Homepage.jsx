@@ -11,6 +11,7 @@ import Grid from "@mui/material/Grid";
 import { db } from "./firebase";
 import AppBar from "./Appbar";
 import Insights from "./Insights";
+import ProfessorNotes from "./ProfessorNotes";
 import About from "./About";
 import NoProfessors from "./NoProfessors";
 import FeelingRating from "./FeelingRating";
@@ -55,11 +56,13 @@ const Homepage = () => {
                   Welcome Professor
                 </Typography>
               </Grid>
+              <ProfessorNotes/>
             </Box>
           ) : (
             <>
               {userData && userData.professors.length !== 0 ? (
                 <FeelingRating />
+                
               ) : (
                 <NoProfessors />
               )}
@@ -79,7 +82,6 @@ const Homepage = () => {
           </Grid>
         </Box>
       )}
-    <Insights />
       <About />
     </div>
   );
