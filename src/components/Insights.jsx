@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Grid, Box, Typography } from "@mui/material";
+import { Grid, Box, Typography, Button } from "@mui/material";
 import { Line, Bar } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
 
@@ -13,6 +13,7 @@ function Insights({ ratingTrend }) {
   const auth = getAuth();
   const [user] = useAuthState(auth);
   const [userData, setUserData] = useState();
+  
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -21,7 +22,7 @@ function Insights({ ratingTrend }) {
       if (docSnap.exists()) {
         setUserData(docSnap.data());
         const profDoc = await getDoc(
-          doc(db, "users", userData.professors[0].profId)
+          doc(db, "users", docSnap.data().professors[0].profId)
         );
         setProfNotes(profDoc.data().notes);
       } else {
