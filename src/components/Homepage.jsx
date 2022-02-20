@@ -62,7 +62,7 @@ const Homepage = () => {
               {userData && userData.professors.length !== 0 ? (
                 <>
                   <FeelingRating />
-                  <Insights />
+                  <Insights ratingTrend={ratingTrend} />
                 </>
               ) : (
                 <NoProfessors />
@@ -83,7 +83,7 @@ const Homepage = () => {
           </Grid>
         </Box>
       )}
-      <Insights ratingTrend={ratingTrend} />
+      
       <About />
     </div>
   );
