@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect,useState} from "react";
+
 import { getAuth } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
@@ -11,10 +12,10 @@ import Grid from "@mui/material/Grid";
 import { db } from "./firebase";
 import AppBar from "./Appbar";
 import Insights from "./Insights";
-import ProfessorNotes from "./ProfessorNotes";
 import About from "./About";
 import NoProfessors from "./NoProfessors";
 import FeelingRating from "./FeelingRating";
+import Professor from "./Professor";
 
 const Homepage = () => {
   const [userData, setUserData] = useState();
@@ -38,30 +39,23 @@ const Homepage = () => {
     fetchUser();
   }, [user, navigate]);
 
+
+
+
   return (
     <div>
       <AppBar />
       {userData ? (
         <>
           {userData && userData.role === "professor" ? (
-            <Box sx={{ textAlign: "center" }} mt={10}>
-              <Grid
-                container
-                direction="column"
-                justifyContent="center"
-                alignItems="center"
-                spacing={5}
-              >
-                <Typography style={{ fontSize: "3rem" }}>
-                  Welcome Professor
-                </Typography>
-              </Grid>
-              <ProfessorNotes/>
-            </Box>
+            <Professor />
           ) : (
             <>
               {userData && userData.professors.length !== 0 ? (
+                <>
                 <FeelingRating />
+                <Insights/>
+                </>
                 
               ) : (
                 <NoProfessors />
