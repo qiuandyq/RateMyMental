@@ -1,18 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Grid, Box, Typography } from "@mui/material";
 import { Line, Bar } from "react-chartjs-2";
-import { Chart, registerables } from "chart.js/auto";
 
-import {
-  collection,
-  query,
-  where,
-  getDocs,
-  doc,
-  updateDoc,
-  arrayUnion,
-  getDoc,
-} from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { db } from "./firebase";
