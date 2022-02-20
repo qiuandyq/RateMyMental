@@ -52,7 +52,11 @@ const Homepage = () => {
           ) : (
             <>
               {userData && userData.professors.length !== 0 ? (
+                <>
                 <FeelingRating />
+                <Insights/>
+                </>
+                
               ) : (
                 <NoProfessors />
               )}
@@ -72,7 +76,6 @@ const Homepage = () => {
           </Grid>
         </Box>
       )}
-    <Insights />
       <About />
     </div>
   );

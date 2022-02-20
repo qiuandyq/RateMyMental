@@ -1,9 +1,44 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Grid, Box, Typography } from "@mui/material";
 import { Line } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js/auto";
 
+import {
+    collection,
+    query,
+    where,
+    getDocs,
+    doc,
+    updateDoc,
+    arrayUnion,
+    getDoc,
+  } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { db } from "./firebase";
+
 function Insights() {
+    const [profNotes, setProfNotes] = useState("");
+    const auth = getAuth();
+    const [user] = useAuthState(auth);
+    const [userData, setUserData] = useState();
+
+    useEffect(() => {
+        const fetchUser = async () => {
+          const docRef = doc(db, "users", user.uid);
+          const docSnap = await getDoc(docRef);
+          if (docSnap.exists()) {
+            setUserData(docSnap.data());
+            const profDoc = await getDoc(doc(db, "users", userData.professors[0].profId));
+            setProfNotes(profDoc.data().notes);
+          } else {
+            console.log("No such document!");
+          }
+        };
+        fetchUser();
+      }, [user]);
+
+
   return (
     <Box
       style={{
@@ -28,7 +63,7 @@ function Insights() {
             </div>
           </Box>
         </Grid>
-        <Grid item xs={7}>
+        <Grid item xs={8.5}>
           <Box
             style={{
               minHeight: "40vh",
@@ -40,7 +75,7 @@ function Insights() {
             <div
               style={{
                 textAlign: "center",
-                fontSize: "30px",
+                fontSize: "40px",
                 paddingTop: "10px",
               }}
             >
@@ -73,7 +108,7 @@ function Insights() {
             </Box>
           </Box>
         </Grid>
-        <Grid item xs={5}>
+        <Grid item xs={3.5}>
           <Box
             style={{
               minHeight: "40vh",
@@ -85,28 +120,38 @@ function Insights() {
               style={{
                 textAlign: "center",
                 fontSize: "30px",
-                paddingTop: "10px",
+                paddingTop: "50px",
               }}
             >
-              Notes from your host
+            <Typography
+            style={{fontSize: "40px"}}>
+                Notes from the host:
+            </Typography>  
+            <Grid container
+                display="columns"
+                alignItems="center"
+                justifyContents="center"
+                >
+
+            <Grid
+            display="columns"
+            alignItems="center"
+            justifyContents="center"
+            width="100%"
+            overflowWrap="break-word">
+            <Typography
+              style={{fontSize: "24px", marginTop: "50px"}}>
+              "  {profNotes} "
+            </Typography>
+            </Grid>
+            </Grid>
+
             </div>
             <Box>
               <Typography></Typography>
             </Box>
           </Box>
         </Grid>
-        {/* <Grid item xs={12}>
-                <Box
-                style={{
-                    minHeight: "30vh", 
-                    backgroundColor:"#A9E1CB",
-                    borderRadius:"10px"}}>
-                <div style={{ 
-                    textAlign: "center", 
-                    fontSize: "30px", 
-                    paddingTop:"10px"}}>Daily Article</div>
-                </Box>
-            </Grid>  */}
       </Grid>
     </Box>
   );
