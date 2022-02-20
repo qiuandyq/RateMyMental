@@ -29,7 +29,7 @@ const Appbar = () => {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
         position="static"
-        style={{ background: "transparent", boxShadow: "none" }}
+        style={{ background: "transparent" }}
       >
         <Container maxWidth="xl">
           <Toolbar disableGutters>
