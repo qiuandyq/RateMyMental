@@ -10,7 +10,7 @@ import Paper from "@mui/material/Paper";
 
 import { db } from "./firebase";
 
-const Professor = () => {
+const Professor = ({ setRatingTrend }) => {
   const auth = getAuth();
   const [user] = useAuthState(auth);
   const [userData, setUserData] = useState();
@@ -52,14 +52,17 @@ const Professor = () => {
             ...ratings,
             { id: stu.stuId, ratings: data.ratings },
           ]);
+          setRatingTrend((prev) => ({
+            ...prev,
+            [data.ratings[data.ratings.length - 1].rating]:
+              prev[data.ratings[data.ratings.length - 1].rating] + 1,
+          }));
         } else {
           console.log("No such document!");
         }
       });
     }
   }, [userData]);
-
-  console.log("ratings", ratings);
 
   const findRating = (stuId) => {
     let rating = 0;

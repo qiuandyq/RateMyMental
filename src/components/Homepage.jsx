@@ -1,4 +1,4 @@
-import { useEffect,useState} from "react";
+import { useEffect, useState } from "react";
 
 import { getAuth } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -19,6 +19,17 @@ import Professor from "./Professor";
 
 const Homepage = () => {
   const [userData, setUserData] = useState();
+  const [ratingTrend, setRatingTrend] = useState({
+    1: 0,
+    2: 0,
+    3: 0,
+    4: 0,
+    5: 0,
+    6: 0,
+    7: 0,
+    8: 0,
+    9: 0,
+  });
 
   const auth = getAuth();
   const [user] = useAuthState(auth);
@@ -39,16 +50,13 @@ const Homepage = () => {
     fetchUser();
   }, [user, navigate]);
 
-
-
-
   return (
     <div>
       <AppBar />
       {userData ? (
         <>
           {userData && userData.role === "professor" ? (
-            <Professor />
+            <Professor setRatingTrend={setRatingTrend} />
           ) : (
             <>
               {userData && userData.professors.length !== 0 ? (
@@ -72,7 +80,7 @@ const Homepage = () => {
           </Grid>
         </Box>
       )}
-    <Insights />
+      <Insights ratingTrend={ratingTrend} />
       <About />
     </div>
   );
