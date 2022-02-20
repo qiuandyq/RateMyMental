@@ -48,7 +48,7 @@ RateMyMental is a mental health resource and solution to the long wait times for
 
 ### What's next!
 * We are excited about our site and hope to extend it beyond "professors" and "students"
-*
+* We also see this as a possible business venture and are still exploring ideas on how we can grow our features
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ### Built With
