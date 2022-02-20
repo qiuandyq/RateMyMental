@@ -1,7 +1,83 @@
-# Getting Started with Create React App
+<div id="top"></div>
+<h1 align="center">RateMyMental</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+                                                              
 
+
+<h5 align="center"> Andy Qiu, Drew Lilly and Katherine Cheung</h5>
+
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+    </li>
+    
+  </ol>
+</details>
+
+
+
+<!-- ABOUT THE PROJECT -->
+## About The Project
+
+ We have provided a tool for confiers and confidants alike to stay connected with the click of a button. This tool can be used between healthcare professionals and clients or even professors and students. 
+
+### Inspiration/Problem
+RateMyMental is a mental health resource and solution to the long wait times for counselling services. In addition, this tool provides a quick and <b>contactless</b> ways to notify others of your current mental state.
+
+### Features
+* "How are you feeling..." - send a live check-in (1-bad, 9-great) to your host
+* Insights - keep track of your moods over the past week and see notes from your host
+* Profile - See a visual display of your daily moods 
+
+### Challenges you ran into
+* Members of the group were not familiar with our tech stack, so starting the project was slow, but spending time reading documentatio and watching tutorials was well worth our time since development sped up afterwards
+* Though the site ran well on each of our local environments, deployment caused several unforseen issues
+
+### What you learned/are proud of
+* We learned so much about React and how amzing it is during development!!
+* We are proud of reaching the deployment stage in such a short period of time 
+
+### What's next!
+* We are excited about our site and hope to extend it beyond "professors" and "students"
+*
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+### Built With
+
+This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+
+* [React.js](https://reactjs.org/)
+* [Node.js](https://nodejs.org/en/)
+* [MaterialUI](https://mui.com/)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- GETTING STARTED -->
+## Getting Started
+
+Here's how to get started
+
+### Public Domain
+
+You can access our sit from our public domain
+https://rate-my-mental.vercel.app/login
+
+or see below to run locally
+
+### Prerequisites
+* npm
+  ```sh
+  npm install npm@latest -g
+  ```
 ## Available Scripts
 
 In the project directory, you can run:
@@ -14,57 +90,10 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### `npm test`
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
