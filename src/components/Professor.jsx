@@ -6,6 +6,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
 
 import { db } from "./firebase";
 
@@ -13,6 +14,19 @@ const Professor = () => {
   const auth = getAuth();
   const [user] = useAuthState(auth);
   const [userData, setUserData] = useState();
+  const [ratings, setRatings] = useState([]);
+
+  const color = {
+    1: "#FFABAB",
+    2: "#FFC0AB",
+    3: "#FFD1AB",
+    4: "#FFDBAB",
+    5: "#FFEDAB",
+    6: "#EDFFAB",
+    7: "#E0FFAB",
+    8: "#D3FFAB",
+    9: "#C3FFAB",
+  };
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -27,10 +41,53 @@ const Professor = () => {
     fetchUser();
   }, [user]);
 
-  console.log("userData", userData);
+  useEffect(() => {
+    if (userData) {
+      userData.students.forEach(async (stu) => {
+        const docRef = doc(db, "users", stu.stuId);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          setRatings((ratings) => [
+            ...ratings,
+            { id: stu.stuId, ratings: data.ratings },
+          ]);
+        } else {
+          console.log("No such document!");
+        }
+      });
+    }
+  }, [userData]);
+
+  console.log("ratings", ratings);
+
+  const findRating = (stuId) => {
+    let rating = 0;
+    let date = "";
+    ratings.find((student) => {
+      if (student.id === stuId) {
+        rating = student.ratings[student.ratings.length - 1].rating;
+        date = new Date(
+          student.ratings[student.ratings.length - 1].date
+        ).toDateString();
+      }
+    });
+    return (
+      <>
+        <Paper
+          style={{
+            backgroundColor: color[rating],
+          }}
+        >
+          {rating}
+        </Paper>
+        (last updated: {date})
+      </>
+    );
+  };
 
   return (
-    <Box sx={{ textAlign: "center" }} mt={10}>
+    <Box sx={{ textAlign: "center" }} mt={10} mr={15} ml={15}>
       <Grid
         container
         direction="column"
@@ -43,11 +100,39 @@ const Professor = () => {
             Welcome Professor
           </Typography>
         </Grid>
-        <Grid item xs={12}>
-          <Typography style={{ fontSize: "1.5rem" }}>
-            Here are your students mental ratings for today!
-          </Typography>
-        </Grid>
+        {userData && userData.students ? (
+          <>
+            <Grid item xs={12}>
+              <Typography style={{ fontSize: "1.5rem" }}>
+                Here are your students mental ratings for today!
+              </Typography>
+            </Grid>
+            <Grid
+              container
+              item
+              direction="row"
+              justifyContent="center"
+              alignItems="center"
+              spacing={5}
+            >
+              {userData.students.map((stu) => (
+                <Grid item xs={4}>
+                  <Typography>
+                    {stu.firstName + " " + stu.lastName}:{" "}
+                    {findRating(stu.stuId)}
+                  </Typography>
+                </Grid>
+              ))}
+            </Grid>
+          </>
+        ) : (
+          <Grid item xs={12}>
+            <Typography style={{ fontSize: "1.5rem" }}>
+              Unfortunately you have no students at the moment. Let your
+              students know to add your as a professor!
+            </Typography>
+          </Grid>
+        )}
       </Grid>
     </Box>
   );

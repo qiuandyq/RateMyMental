@@ -4,6 +4,18 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 
 const FeelingRating = () => {
+  const color = {
+    1: "#FFABAB",
+    2: "#FFC0AB",
+    3: "#FFD1AB",
+    4: "#FFDBAB",
+    5: "#FFEDAB",
+    6: "#EDFFAB",
+    7: "#E0FFAB",
+    8: "#D3FFAB",
+    9: "#C3FFAB",
+  };
+
   return (
     <Grid
       container
