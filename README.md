@@ -69,7 +69,7 @@ Here's how to get started
 ### Public Domain
 
 You can access our sit from our public domain
-http://www.ratemymental.tech/](https://rate-my-mental.vercel.app/
+https://rate-my-mental.vercel.app/
 
 or see below to run locally
 
